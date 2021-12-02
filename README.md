@@ -1,53 +1,26 @@
 # Cryptocurrency Clusters
 
-## Background
+A prominent investment bank is planning to offer a new cryptocurrency investment portfolio for its customers. An analysis was required for the company so as to create a report to include a vast number of cryptocurrencies on the trading market and determine whether they can be grouped to create a classification system for this new investment.
 
-* You are on the Advisory Services Team of a financial consultancy. One of your clients, a prominent investment bank, is interested in offering a new cryptocurrency investment portfolio for its customers. The company, however, is lost in the vast universe of cryptocurrencies. They’ve asked you to create a report that includes what cryptocurrencies are on the trading market and determine whether they can be grouped to create a classification system for this new investment.
 
-* You have been handed raw data, so you will first need to process it to fit the machine learning models. Since there is no known classification system, you will need to use unsupervised learning. You will use several clustering algorithms to explore whether the cryptocurrencies can be grouped together with other similar cryptocurrencies. You will use data visualization to share your findings with the investment bank.
+## Analysis
 
-## Instructions
+Data has been prepared by focusing on the cryptocurrencies that are being traded currently. 
 
-### Data Preparation
+After cleansing the not null values in the data set, a total of 532 rows out of 1252 rows have been identified for analysis.
 
-* Read `crypto_data.csv` into Pandas. The dataset was obtained from [CryptoCompare](https://min-api.cryptocompare.com/data/all/coinlist).
+Per the initial data, only 2 feature categories were identified (Algorithm and ProofType). Using get_dummies, the features of data has been converted into numerical and the columns increased to 71 for Algorithm and to 25 in case of ProofTypes.
 
-* Discard all cryptocurrencies that are not being traded. In other words, filter for currencies that are currently being traded. Once you have done this, drop the `IsTrading` column from the dataframe.
+When the dimensionality reduction technique Principal Component Analysis (PCA) was performed on standardized data, the number of features to preserve 90% of variance has reduced to 74.
 
-* Remove all rows that have at least one null value.
+For further reduction of dimensions, t-Distributed Stochastic Neighbor Embedding (t-SNE) was applied and the number of features have reduced to only 2.
 
-* Filter for cryptocurrencies that have been mined. That is, the total coins mined should be greater than zero.
+With the obtained feature results, Cluster analysis was performed using k-Means. We could see maximum amount of the data has formed into only one cluster with only one or 2 outliers.
 
-* In order for your dataset to be comprehensible to a machine learning algorithm, its data should be numeric. Since the coin names do not contribute to the analysis of the data, delete the `CoinName` from the original dataframe.
+![Scatter Plot](Images/Scatter-plot-of-t-SNE.png)
 
-* Your next step in data preparation is to convert the remaining features with text values, `Algorithm` and `ProofType`, into numerical data. To accomplish this task, use Pandas to create dummy variables. Examine the number of rows and columns of your dataset now. How did they change?
+Using k-Means, cluster analysis was performed to identify the number of clusters by locating the elbow drop on the curve. But the line seems to be gradually reducing with no elbow.
 
-* Standardize your dataset so that columns that contain larger values do not unduly influence the outcome.
+Based on the analysis, I would like to convey that the cryptocurrencies cannot be grouped in clusters and they are not very different to one another.
 
-### Dimensionality Reduction
-
-* Creating dummy variables above dramatically increased the number of features in your dataset. Perform dimensionality reduction with PCA. Rather than specify the number of principal components when you instantiate the PCA model, it is possible to state the desired **explained variance**. For example, say that a dataset has 100 features. Using `PCA(n_components=0.99)` creates a model that will preserve approximately 99% of the explained variance, whether that means reducing the dataset to 80 principal components or 3. For this project, preserve 90% of the explained variance in dimensionality reduction. How did the number of the features change?
-
-* Next, further reduce the dataset dimensions with t-SNE and visually inspect the results. In order to accomplish this task, run t-SNE on the principal components: the output of the PCA transformation. Then create a scatter plot of the t-SNE output. Observe whether there are distinct clusters or not.
-
-### Cluster Analysis with k-Means
-
-* Create an elbow plot to identify the best number of clusters. Use a for-loop to determine the inertia for each `k` between 1 through 10. Determine, if possible, where the elbow of the plot is, and at which value of `k` it appears.
-
-### Recommendation
-
-* Based on your findings, make a brief (1-2 sentences) recommendation to your clients. Can the cryptocurrencies be clustered together? If so, into how many clusters? 
-
-## Rubric
-
-[Unit 20 - Unsupervised Machine Learning Homework Rubric - Cryptocurrency Clusters](https://docs.google.com/document/d/1zhiC8-PtfMknDxYHagsTukryQAJSdXFRWa-aK3W28Vg/edit?usp=sharing)
-
-- - -
-
-## References
-
-Crypto Coin Comparison Ltd. (2020) Coin market capitalization lists of crypto currencies and prices. Retrieved from [https://www.cryptocompare.com/coins/list/all/USD/1](https://www.cryptocompare.com/coins/list/all/USD/1)
-
-- - -
-
-© 2021 Trilogy Education Services, LLC, a 2U, Inc. brand. Confidential and Proprietary. All Rights Reserved.
+![Elbow Curve](Images/Elbow-plot-k-Means-Cluster.png)
