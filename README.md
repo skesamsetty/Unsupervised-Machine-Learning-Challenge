@@ -21,6 +21,6 @@ With the obtained feature results, Cluster analysis was performed using k-Means.
 
 Using k-Means, cluster analysis was performed to identify the number of clusters by locating the elbow drop on the curve. But the line seems to be gradually reducing with no elbow.
 
-Based on the analysis, I would like to convey that the cryptocurrencies cannot be grouped in clusters and they are not very different to one another.
+Based on the analysis, I would like to convey that the cryptocurrencies cannot be grouped in clusters and they are not very different to one another as per the given features.
 
 ![Elbow Curve](Images/Elbow-plot-k-Means-Cluster.png)
